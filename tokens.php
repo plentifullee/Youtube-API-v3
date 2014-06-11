@@ -12,8 +12,8 @@ $feed = json_decode(file_get_contents($path));
 
 for($i = 0; $i < $maxResults; $i++) {
 	//retrieve video information
-	$video_title 				= $feed->{'items'}[$i]->{'snippet'}->{'title'};
-	$video_description 			= $feed->{'items'}[$i]->{'snippet'}->{'description'};
+	$video_title 		= $feed->{'items'}[$i]->{'snippet'}->{'title'};
+	$video_description 	= $feed->{'items'}[$i]->{'snippet'}->{'description'};
 
 	//output the results
 	echo "<b>Title: </b>".$video_title."<br>";
@@ -33,8 +33,8 @@ $feed = json_decode(file_get_contents($path));
 
 for($i = 0; $i < $maxResults; $i++) {
 	//retrieve video information
-	$video_title 				= $feed->{'items'}[$i]->{'snippet'}->{'title'};
-	$video_description 			= $feed->{'items'}[$i]->{'snippet'}->{'description'};
+	$video_title 		= $feed->{'items'}[$i]->{'snippet'}->{'title'};
+	$video_description 	= $feed->{'items'}[$i]->{'snippet'}->{'description'};
 
 	//output the results
 	echo "<b>Title: </b>".$video_title."<br>";
