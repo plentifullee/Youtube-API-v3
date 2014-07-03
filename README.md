@@ -1,9 +1,7 @@
 Youtube-API-v3
 ==============
 
-Youtube API v3 codes using PHP
-
-Open source codes, projects and workshops.
+Examples of using Youtube's API v3 codes using PHP
 
 For more information visit:
 http://plenty.codes
