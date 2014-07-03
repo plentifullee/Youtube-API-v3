@@ -1,7 +1,7 @@
 <?php
 //YouTube API v3.0
 //Examples of retrieving and processing a JSON format youtube feed including thumbnails
-//For the in depth tutorial, go to http://plenty.codes
+//Visit my site http://plenty.codes for more info
 
 $playlist = "replace_me"; //replace with a youtube playlist ID
 $api_key = "replace_me"; //your public access API key from google's developer console
