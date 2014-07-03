@@ -9,5 +9,6 @@ $channel_name = "replace_me"; //browser a channel on youtube and get channel nam
 $path = "https://www.googleapis.com/youtube/v3/channels?part=id&forUsername=$channel_name&key=$api_key";
 $feed = json_decode(file_get_contents($path));
 
-$video_id = $feed->{'items'}[0]->{'id'};
-echo $video_id;
+//retrieve channel id
+$channel_id = $feed->{'items'}[0]->{'id'};
+echo $channel_id;
