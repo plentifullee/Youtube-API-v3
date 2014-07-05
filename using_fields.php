@@ -1,38 +1,30 @@
 <?php
 //YouTube API v3.0
-//Examples of using fields to restrict JSON results
-//Visit my site http://plenty.codes for more info
+//Examples of using fields to return specific JSON results
+//Created by plentifullee, visit my site at http://plenty.codes
 
-$playlist = "replace_me"; //replace with a youtube playlist ID
 $api_key = "replace_me"; //your public access API key from google's developer console
-$maxResults = "5";
-$fields = "items/snippet/resourceId/videoId"; //getting only the video ID on the JSON feed
+$maxResults = "5"; //max JSON results
+$playlist = "replace_me"; //replace with a youtube playlist ID, eg: PLOU2XLYxmsIJQhUeN9S2kQ-3PWzPZVZD0
 
+echo "<b>Playlist id:</b> ".$playlist."<br>";
+echo "<b>Max Results:</b> ".$maxResults;
+echo "<hr>";
+
+$path = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=$maxResults&playlistId=$playlist&key=$api_key";
+echo "<b>Original Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a><br><br>";
+
+$fields = urlencode("items/snippet/resourceId/videoId"); //getting only the video ID on the JSON feed
 $path = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=$maxResults&playlistId=$playlist&fields=$fields&key=$api_key";
-$feed = json_decode(file_get_contents($path));
+echo "Restrict results to only: <b>".urldecode($fields)."</b>";
+echo "<br><b>Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a><br><br>"; //output the path used
 
-for($i = 0; $i < $maxResults; $i++) {
-	//retrieve video information
-	$video_id = $feed->{'items'}[$i]->{'snippet'}->{'resourceId'}->{'videoId'};
-	//output the results
-	echo "<b>Playlist ID: </b>".$video_id."<br><br>";
-}
-
-//output the path used
-echo "<b>Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a><br><br><br>";
-
-
-$fields = "items/snippet/title"; //getting only the video title on the JSON feed
-
+$fields = urlencode("items/snippet/title"); //getting only the video title on the JSON feed
 $path = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=$maxResults&playlistId=$playlist&fields=$fields&key=$api_key";
-$feed = json_decode(file_get_contents($path));
+echo "Restrict results to only: <b>".urldecode($fields)."</b>";
+echo "<br><b>Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a><br><br>";
 
-for($i = 0; $i < $maxResults; $i++) {
-	//retrieve video information
-	$video_title = $feed->{'items'}[$i]->{'snippet'}->{'title'};
-	//output the results
-	echo "<b>Video Title: </b>".$video_title."<br><br>";
-}
-
-//output the path used
-echo "<b>Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a>";
+$fields = urlencode("items/snippet(resourceId/videoId,title)"); //getting only the video ID and video title on the JSON feed
+$path = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=$maxResults&playlistId=$playlist&fields=$fields&key=$api_key";
+echo "Restrict results to only: <b>".urldecode($fields)."</b>";
+echo "<br><b>Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a>";
