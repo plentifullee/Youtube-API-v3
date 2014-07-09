@@ -15,7 +15,8 @@ echo "<b>Max Results:</b> ".$maxResults."<br>";
 echo "<b>Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a><br><br>"; //output the path used
 echo "<hr>";
 
-echoResults($feed);
+//process results for the first time
+parseJSON($feed);
 if(isset($feed->{'nextPageToken'})) {
 	$nextToken = $feed->{'nextPageToken'}; //get the next token
 	echo "<b>Next page token:</b> ".$nextToken."<br><br>";
@@ -24,7 +25,8 @@ if(isset($feed->{'nextPageToken'})) {
 	$path = getPath($nextToken); //use the next token on the path
 	$feed = json_decode(file_get_contents($path));
 	echo "<b>Feed URL:</b> <a href='".$path."' target='_blank'>".$path."</a><br><br>"; //output the path used
-	echoResults($feed);
+	//process results again using a page token
+	parseJSON($feed);
 
 	if(isset($feed->{'nextPageToken'})) { //check for last page
 		$nextToken = $feed->{'nextPageToken'};
@@ -56,7 +58,7 @@ function getPath($nextToken = FALSE) {
 }
 
 //gets specific results from the json feed and echo
-function echoResults($feed) {
+function parseJSON($feed) {
 	global $maxResults;
 	for($i = 0; $i < $maxResults; $i++) {
 		if(isset($feed->{'items'}[$i])) { //if result exist
